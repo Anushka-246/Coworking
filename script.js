@@ -167,4 +167,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ——— BLOG PAGE NAVIGATION ———
+  const mainContent = document.querySelector('body > :not(#blogPage):not(script)');
+  const blogPage = document.getElementById('blogPage');
+
+  // Function to show blog page
+  window.showBlogPage = function() {
+    // Hide main content
+    document.querySelectorAll('body > section, body > footer').forEach(el => {
+      if (el.id !== 'blogPage') {
+        el.style.display = 'none';
+      }
+    });
+    // Show blog page
+    blogPage.style.display = 'block';
+    window.scrollTo(0, 0);
+  };
+
+  // Function to show home page
+  window.showHomePage = function() {
+    // Show main content
+    document.querySelectorAll('body > section, body > footer').forEach(el => {
+      el.style.display = '';
+    });
+    // Hide blog page
+    blogPage.style.display = 'none';
+    window.scrollTo(0, 0);
+  };
+
+  // Add click handlers to blog links
+  document.querySelectorAll('.nav-links a[href="blog.html"], .mobile-menu a[href="blog.html"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showBlogPage();
+    });
+  });
+
 });
